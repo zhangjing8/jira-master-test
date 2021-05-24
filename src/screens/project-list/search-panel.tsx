@@ -1,7 +1,27 @@
+/*
+ * @Description: 
+ * @Author: zhangjing
+ * @Date: 2021-05-17 13:17:25
+ * @LastEditors: zhangjing
+ */
 import React from 'react';
 import { useState,useEffect } from "react";
-
-export const SearchPanel=({users,param,setParam})=>{
+export interface User{
+    id:string;
+    name:string;
+    email:string;
+    title:string;
+    organization:string;
+}
+interface SearchPanelProps {
+    users:User[],
+    param:{
+        name:string;
+        personId:string;
+    },
+    setParam:(param: SearchPanelProps['param']) => void;
+}
+export const SearchPanel=({users,param,setParam}:SearchPanelProps)=>{
     // const [param, setParam] = useState({
     //     name:"",
     //     personId:""

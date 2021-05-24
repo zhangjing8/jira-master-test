@@ -20,9 +20,10 @@ export const ProjectListScreen = () => {
     });
     const [users, setUsers] = useState([]);
     const [list, setList] = useState([]);
-    const debouncedParam = useDebounce(param, 2000);
+    const debouncedParam = useDebounce(param, 200);
     useEffect(() => {
         fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async (response) => {
+            debugger;
             if (response.ok) {
                 setList(await response.json());
                 //async await                Body.json()
@@ -41,7 +42,7 @@ export const ProjectListScreen = () => {
                 setUsers(await response.json());
             }
         })
-    }, []);
+    });
 
     return <div>
         <SearchPanel users={users} param={param} setParam={setParam}></SearchPanel>
