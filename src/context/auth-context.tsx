@@ -5,7 +5,7 @@
  * @LastEditors: zhangjing
  */
 import React,{ReactNode, useState} from 'react';
-import * as auth from 'auth.provider';
+import * as auth from 'auth.provider'
 import { User } from 'types/user';
 interface AuthForm {
     username:string,
