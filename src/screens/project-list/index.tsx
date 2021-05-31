@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import { SearchPanel } from "./search-panel";
 import { List } from "./list";
 import * as qs from 'qs';
-import { cleanObject, useDebounce, useMount } from 'utils';
+import { cleanObject, useDebounce, useMount } from '../../utils';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 export const ProjectListScreen = () => {
@@ -31,8 +31,10 @@ export const ProjectListScreen = () => {
                 // response.json().then(data => {
                 //   // do something with your data
                 // });
+            }else{
+                alert('response error')
             }
-        })
+        }).catch(()=>alert('console.error()'))
     }, [debouncedParam]);
 
     useMount(() => {
