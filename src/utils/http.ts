@@ -4,6 +4,7 @@
  * @Date: 2021-05-31 14:18:31
  * @LastEditors: zhangjing
  */
+import { useAuth } from "context/auth-context";
 import qs from "qs";
 import * as auth from '../auth.provider'
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -11,7 +12,7 @@ interface Config extends RequestInit {
     data?:object,
     token?:string
 }
-export const http = async (endpoint: string, { data,token,headers,...customConfig }:Config) => {
+export const http = async (endpoint: string, { data,token,headers,...customConfig }:Config={}) => {
     const config ={
         method:"GET",
         headers:{
@@ -40,4 +41,11 @@ export const http = async (endpoint: string, { data,token,headers,...customConfi
         }
     })
 
+}
+// 5-8 用useHttp管理JWT和登录状态，保持登录状态
+export const useHttp=()=>{
+    const {user}=useAuth()
+    //TODO 讲解 TS 操作符
+    return (...[endpoint,config]:Parameters<typeof http>)=>http(endpoint,{...config,token:user?.token})
+    // return ([endpoint,config]:[string,Config])=>http(endpoint,{...config,token:user?.token})
 }
