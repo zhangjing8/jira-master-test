@@ -8,6 +8,7 @@ import React, { FormEvent } from 'react'
 import * as qs from 'qs';
 import { cleanObject, useDebounce, useMount } from '../utils';
 import { useAuth } from '../context/auth-context';
+import {Button, Form, Input} from 'antd';
 interface Base{
     id:number;
 }
@@ -54,28 +55,32 @@ export const LoginScreen=()=>{
     //     })
     // }
     //HTMLFormElement extens Element
-    const handleSubmit=(event:FormEvent<HTMLFormElement>)=>{
-        event.preventDefault();
-        const username=(event.currentTarget.elements[0] as HTMLInputElement).value
-        const password=(event.currentTarget.elements[1] as HTMLInputElement).value
-        login({username,password});
+    // const handleSubmit=(event:FormEvent<HTMLFormElement>)=>{
+    //     event.preventDefault();
+    //     const username=(event.currentTarget.elements[0] as HTMLInputElement).value
+    //     const password=(event.currentTarget.elements[1] as HTMLInputElement).value
+    //     login({username,password});
+    // }
+    const handleSubmit=(values:{username:string,password:string})=>{
+        login(values);
     }
-    return <form onSubmit={handleSubmit}>
-        <div></div>
+    return <Form onFinish={handleSubmit}>
+        {/* <div>
         {
             user?<div>
                 登陆成功，用户名:{user?.name}
                 token:{user.token}
             </div>:null
         }
-        <div>
-            <label htmlFor="username">用户名</label>
-            <input type="text" id={"username"}></input>
-        </div>
-        <div>
-            <label htmlFor="password">密码</label>
-            <input type="password" id={"password"}></input>
-        </div>
-        <button type={"submit"}>登录</button>
-    </form>
+        </div> */}
+        <Form.Item rules={[{required:true,message:"请输入用户名"}]} name="username">
+            <Input placeholder='用户名' type="text" id={"username"}></Input>
+        </Form.Item>
+        <Form.Item rules={[{required:true,message:"请输入密码"}]} name="password">
+            <Input placeholder='密码' type="password" id={"password"}></Input>
+        </Form.Item>
+        <Form.Item>
+            <Button htmlType='submit' type={"primary"}>登录</Button>
+        </Form.Item>
+    </Form>
 }

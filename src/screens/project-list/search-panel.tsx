@@ -4,6 +4,7 @@
  * @Date: 2021-05-17 13:17:25
  * @LastEditors: zhangjing
  */
+import { Input, Select } from 'antd';
 import React from 'react';
 import { useState,useEffect } from "react";
 export interface User{
@@ -38,19 +39,19 @@ export const SearchPanel=({users,param,setParam}:SearchPanelProps)=>{
     // setParam(Object.assign({},param,{name:evt.target.value}))
     return <form action="">
         <div>
-            <input type="text" value={param.name} onChange={ evt=>setParam({
+            <Input type="text" value={param.name} onChange={ evt=>setParam({
                 ...param,
                 name:evt.target.value
-            })}></input>
-            <select name="" id="" value={param.personId} onChange={ evt=>setParam({
+            })}></Input>
+            <Select value={param.personId} onChange={ value=>setParam({
                 ...param,
-                personId:evt.target.value
+                personId:value
             })}>
-                <option value="">类型</option>
+                <Select.Option value="">类型</Select.Option>
                 {
-                    users.map(user=><option key={user.id} value={user.id}>{user.name}</option>)
+                    users.map(user=><Select.Option key={user.id} value={user.id}>{user.name}</Select.Option>)
                 }
-            </select>
+            </Select>
         </div>
     </form>
 }

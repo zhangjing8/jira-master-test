@@ -11,6 +11,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { loadDevTools } from 'jira-dev-tool';
 import { AppProviders } from 'context';
+import 'antd/dist/antd.less'//要在jira-dev-tool之后引入
 
 loadDevTools(()=>{
 ReactDOM.render(
