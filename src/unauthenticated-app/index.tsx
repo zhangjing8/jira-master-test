@@ -61,7 +61,7 @@ width:100%;
 
 const ShadowCard=styled(Card)`
 width: 40rem;
-min-height: 56rem;
+min-height: 33rem;
 padding: 3.2rem 4rem;
 border-radius: 0.3rem;
 box-sizing: border-box;

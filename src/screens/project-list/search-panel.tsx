@@ -1,11 +1,8 @@
-/*
- * @Description: 
- * @Author: zhangjing
- * @Date: 2021-05-17 13:17:25
- * @LastEditors: zhangjing
- */
-import { Input, Select } from 'antd';
+/* @jsxImportSource @emotion/react */
+// 在组件的顶部写上 下面代码，告知当前组件用了emotion行内样式// 
+import {jsx} from '@emotion/react'
 import React from 'react';
+import { Input, Select,Form } from 'antd';
 import { useState,useEffect } from "react";
 export interface User{
     id:string;
@@ -37,12 +34,16 @@ export const SearchPanel=({users,param,setParam}:SearchPanelProps)=>{
     //     })
     // }, [param])
     // setParam(Object.assign({},param,{name:evt.target.value}))
-    return <form action="">
-        <div>
-            <Input type="text" value={param.name} onChange={ evt=>setParam({
+    return <Form css={{marginBottom: "2rem"}} layout="inline">
+        <Form.Item>
+            <Input 
+            placeholder="项目名"
+            type="text" value={param.name} onChange={ evt=>setParam({
                 ...param,
                 name:evt.target.value
             })}></Input>
+            </Form.Item>
+            <Form.Item>
             <Select value={param.personId} onChange={ value=>setParam({
                 ...param,
                 personId:value
@@ -52,6 +53,6 @@ export const SearchPanel=({users,param,setParam}:SearchPanelProps)=>{
                     users.map(user=><Select.Option key={user.id} value={user.id}>{user.name}</Select.Option>)
                 }
             </Select>
-        </div>
-    </form>
+        </Form.Item>
+    </Form>
 }

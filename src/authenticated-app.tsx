@@ -8,19 +8,31 @@ import styled from '@emotion/styled';
 import { Row } from 'components/lib';
 import React from 'react'
 import { useAuth } from './context/auth-context'
+import {ReactComponent as SoftwareLogo} from 'assets/software-logo.svg'
 import { ProjectListScreen } from './screens/project-list'
+import { Dropdown,Menu } from 'antd';
 export const AuthenticatedApp = () => {
-    const { logout } = useAuth();
+    const { logout,user } = useAuth();
     return <Container>
         <Header between={true}>
             <HeaderLeft gap={true}>
-                <h2>logo</h2>
+                <SoftwareLogo width={'18rem'} color={'rgb(38,132,255)'}/>
                 <h2>项目</h2>
                 <h2>用户</h2>
                 
             </HeaderLeft>
             <HeaderRight>
-            <button onClick={() => logout()}>登出</button>
+                <Dropdown overlay={<Menu>
+                    <Menu.Item key='logout'>
+                        <a onClick={() => logout()}>
+                            登出
+                        </a>
+                    </Menu.Item>
+                </Menu>}>
+                    <a onClick={e=>e.preventDefault()}>
+                        Hi,{user?.name}
+                    </a>
+                </Dropdown>
             </HeaderRight>
         </Header>
         {/* <Nav>
@@ -38,7 +50,7 @@ const Container=styled.div`
 display: grid;
 grid-template-rows: 6rem 1fr 6rem;//不会有滚动条
 /* grid-template-rows: 6rem calc(100vh - 6rem) auto; */
-grid-template-columns: 20rem 1fr 20rem;
+/* grid-template-columns: 20rem 1fr 20rem; */
 grid-template-areas: 
 "header header header"
 "main main main"
@@ -50,6 +62,9 @@ height: 100vh;
 `
 //grid-area用来给grid子元素起名字
 const Header = styled(Row)`
+padding: 3.2rem;
+box-shadow: 0 0 5px 0 rgb(0,0,0,0.1);
+z-index: 1;
 /* grid-area: header;
 display: flex;
 flex-direction: row;
@@ -58,7 +73,8 @@ align-items: center; */
 `
 
 const HeaderLeft=styled(Row)``
-const HeaderRight=styled.div``
+const HeaderRight=styled.div`
+`
 
 const HeaderItem=styled.h3`
 margin-right:3rem
