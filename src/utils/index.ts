@@ -4,19 +4,18 @@
  * @Date: 2021-05-17 15:23:15
  * @LastEditors: zhangjing
  */
+// @ts-ignore
 import { useState, useEffect } from "react";
 export const isFalsy = (value:unknown) => value === 0 ? false : !value
 //在函数里改变传入的对象不好
-export const cleanObject = (object:object) => {
+export const cleanObject = (object:{[key:string]:unknown}) => {
     // object.name=1111;
     const result = {
         ...object
     };
     Object.keys(result).forEach(key => {
-        //@ts-ignore
         const value = result[key];
         if (isFalsy(value)) {
-            //@ts-ignore
             delete result[key]
         }
     })

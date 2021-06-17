@@ -9,14 +9,15 @@ import ReactDOM from 'react-dom';
 // import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { loadDevTools } from 'jira-dev-tool';
+import { loadServer,DevTools } from 'jira-dev-tool';
 import { AppProviders } from 'context';
 import 'antd/dist/antd.less'//要在jira-dev-tool之后引入
 
-loadDevTools(()=>{
+loadServer(()=>{
 ReactDOM.render(
   <React.StrictMode>
     <AppProviders>
+      <DevTools></DevTools>
     <App />
     </AppProviders>
   </React.StrictMode>,

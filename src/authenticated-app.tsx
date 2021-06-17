@@ -10,7 +10,7 @@ import React from 'react'
 import { useAuth } from './context/auth-context'
 import {ReactComponent as SoftwareLogo} from 'assets/software-logo.svg'
 import { ProjectListScreen } from './screens/project-list'
-import { Dropdown,Menu } from 'antd';
+import { Button, Dropdown,Menu } from 'antd';
 export const AuthenticatedApp = () => {
     const { logout,user } = useAuth();
     return <Container>
@@ -24,14 +24,14 @@ export const AuthenticatedApp = () => {
             <HeaderRight>
                 <Dropdown overlay={<Menu>
                     <Menu.Item key='logout'>
-                        <a onClick={() => logout()}>
+                        <Button type='link' onClick={() => logout()}>
                             登出
-                        </a>
+                        </Button>
                     </Menu.Item>
                 </Menu>}>
-                    <a onClick={e=>e.preventDefault()}>
+                    <Button type='link' onClick={e=>e.preventDefault()}>
                         Hi,{user?.name}
-                    </a>
+                    </Button>
                 </Dropdown>
             </HeaderRight>
         </Header>
@@ -62,6 +62,7 @@ height: 100vh;
 `
 //grid-area用来给grid子元素起名字
 const Header = styled(Row)`
+width: 100vw;
 padding: 3.2rem;
 box-shadow: 0 0 5px 0 rgb(0,0,0,0.1);
 z-index: 1;
