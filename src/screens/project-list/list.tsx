@@ -5,7 +5,7 @@
  * @LastEditors: zhangjing
  */
 import { render } from '@testing-library/react';
-import { Table } from 'antd';
+import { Table, TableProps } from 'antd';
 import React from 'react';
 import dayjs from 'dayjs'
 import { User } from './search-panel';
@@ -17,12 +17,13 @@ interface Project{
     organization:string;
     created:number;
 }
-interface ListProps{
-    list:Project[];
-    users:User[]
+interface ListProps extends TableProps<Project>{//?
+    // list:Project[];
+    users:User[];
 }
+// type PropsType=Omit<ListProps,'users'>
 
-export const List=({users,list}:ListProps)=>{
+export const List=({users,...props}:ListProps)=>{
     
     return <Table pagination={false} columns={[
         {
@@ -50,5 +51,7 @@ export const List=({users,list}:ListProps)=>{
                 </span>
             }
         }
-    ]} dataSource={list}/>
+    ]} 
+    {...props}
+    />
 }
